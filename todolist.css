@@ -1,0 +1,55 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+
+body {
+	background-color: #eeeeee;
+	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	line-height: 1.4em;
+}
+
+#list {
+	margin: 0 auto;
+	width: 550px;
+  	background-color: #fff;
+  	text-align: center;
+  	padding: 20px 0 0;
+  	border-radius: 0 0 5px 5px;
+  	box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+}
+
+#list h1 {
+	margin: 24px 0px;
+	font-size: 36px;
+}
+
+#first-input {
+	margin: 15px 0 22px;
+	width: 485px;
+	border: 1px solid #999999;
+	line-height: 1.6em;
+	font-size: 26px;
+	padding: 4px 6px;
+	font-style: italic;
+}
+
+#instructions {
+	margin: 35px auto 20px;
+	width: 550px;
+	text-align: center;
+	color: #777777;
+}
+
+#credits {
+	width: 550px;
+	margin: 27px auto;
+	text-align: center;
+	color: #777777;
+	line-height: 10px;
+}
+
+a {
+	color: #888;
+}
