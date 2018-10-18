@@ -53,3 +53,11 @@ body {
 a {
 	color: #888;
 }
+
+.items {
+	list-style: none;
+}
+
+.new-item {
+	background-color: pink;
+}
