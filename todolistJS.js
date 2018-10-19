@@ -15,8 +15,11 @@ input.keypress(function (e) {
 
 
 function enter_pressed() {
-		$(".items").show();
+		$(".items").show(); // открывает список "ul"
 		var it = $("<li class='first-item'>");
 		var item = $(".items");
-		item.append(it);
+	    var text_of_item = $("#first-input").val();
+	    $(it).text(text_of_item); // передаёт текст с поля ввода в список "ul" в качестве одного элемента "li"
+	    item.append(it);
+	    $("#first-input").val(''); // очищает содержимое поля ввода
 	}
