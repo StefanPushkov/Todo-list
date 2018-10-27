@@ -12,12 +12,12 @@ input.keypress(function (e) {
 			return;
 		} else {
 		enter_pressed();
-		add_mrk_all();
 	}
 	}
 });
 
-
+$(".first-input").one("click", add_mrk_all());
+//$("input[type='checkbox']").one("click", update());
 
 
 
@@ -28,7 +28,7 @@ function enter_pressed() {
 		$(".items").show(); // открывает список "ul"
 		var it = $("<li class='first-item'>");
 		var item = $(".items");
-		var checkbox = $("<input class='toggle' type='checkbox'>");
+		var checkbox = $("<input class='toggle' type='checkbox' name='checkbox'>");
 		var label = $('<label class="todos">');
 	    var text_of_item = $("#first-input").val();
 	    var line = $("<div class='line'>"); 
@@ -50,9 +50,8 @@ function add_mrk_all () {
 		mark_all_line.append(mark_all_input);
 		mark_all_line.append(mark_all_label);
 		item.prepend(mark_all_line);
-		$(mark_all_label).text('Mark all as complete')
-
-
+		$(mark_all_label).text('Mark all as complete');
+		
 }
 
 
@@ -61,6 +60,46 @@ function add_mrk_all () {
 *   add or remove "line-through" class to item, when checkbox checked or not
 *
 */
-$(document).on('change', 'input[type="checkbox"]', function () {               
+$(document).on('change', 'input[type="checkbox"]', function () { 
+	$(this).parent().toggleClass("line-through");
+	review();
+});
+
+
+
+
+$(".mark_all").on('change', function () {
+	var t = $(this).prop('checked'); // take a boolean value oof button "mark all"
+	$("input[type='checkbox']").each(function (i) {
+		$(this).prop("checked", t); // присваевается булевое значение кнопки "mark all" к каждому чекбоксу пунктов 
+		$(this).parent().toggleClass("line-through");
+	});
+	$("input[type='checkbox']:checked").parent().addClass("line-through");
+
+});
+/*
+$(".toggle").on('change', function () {
 	$(this).parent().toggleClass("line-through");
 });
+*/
+
+function update() {
+	var done_button = $("<input class='done' type='checkbox'>");
+	var footer = $(".footer");
+	footer.append(done_button);
+	if($("input[type='checkbox']:checked").length > 0) {
+		$(".done").show();
+	} else {
+		$(".done").hide();
+	}
+	
+}
+
+function review() {
+	 difference = $("input[name='checkbox']").length - $("input[name='checkbox']:checked").length;
+	if(difference == 0 && $("input[name='checkbox']").length > 0) {
+		$(".mark_all").prop("checked", true);
+	} else {
+		$('.mark_all').prop("checked", false);
+	}
+}
