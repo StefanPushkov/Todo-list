@@ -12,13 +12,34 @@ input.keypress(function (e) {
 			return;
 		} else {
 		enter_pressed();
+
 	}
 	}
 });
 
 $(".first-input").one("click", add_mrk_all());
-//$("input[type='checkbox']").one("click", update());
 
+
+
+/*
+*
+* Add "Done" button when appears first item
+*
+*/
+
+
+
+/*var foo = false;
+$("#first-input").on("keypress", function(e) {
+	if (e.keyCode == 13 && foo == false) {
+		done_button();
+		foo = true;
+	} else {
+		return;
+	}
+});
+
+*/
 
 
 
@@ -57,19 +78,21 @@ function add_mrk_all () {
 
 /*
 *
-*   add or remove "line-through" class to item, when checkbox checked or not
+*   Add or remove "line-through" class to item, when checkbox checked or not
 *
 */
+
 $(document).on('change', 'input[type="checkbox"]', function () { 
 	$(this).parent().toggleClass("line-through");
 	review();
+	add_done_button();
 });
 
 
 
 
 $(".mark_all").on('change', function () {
-	var t = $(this).prop('checked'); // take a boolean value oof button "mark all"
+	var t = $(this).prop('checked'); // take a boolean value of button "mark all"
 	$("input[type='checkbox']").each(function (i) {
 		$(this).prop("checked", t); // присваевается булевое значение кнопки "mark all" к каждому чекбоксу пунктов 
 		$(this).parent().toggleClass("line-through");
@@ -77,23 +100,21 @@ $(".mark_all").on('change', function () {
 	$("input[type='checkbox']:checked").parent().addClass("line-through");
 
 });
-/*
-$(".toggle").on('change', function () {
-	$(this).parent().toggleClass("line-through");
-});
-*/
 
-function update() {
-	var done_button = $("<input class='done' type='checkbox'>");
+
+function create_button() {
+	var done_div = $("<div id='done'>")
 	var footer = $(".footer");
-	footer.append(done_button);
-	if($("input[type='checkbox']:checked").length > 0) {
-		$(".done").show();
-	} else {
-		$(".done").hide();
-	}
-	
+	var done_button = $("<button id='d'>Done</button>");
+	done_div.append(done_button);
+	footer.append(done_div);
 }
+
+/*
+*
+* Review function checks if ".toggle" checkbox was clicked when ".mark_all" checkbox checked  
+*
+*/
 
 function review() {
 	 difference = $("input[name='checkbox']").length - $("input[name='checkbox']:checked").length;
@@ -101,5 +122,12 @@ function review() {
 		$(".mark_all").prop("checked", true);
 	} else {
 		$('.mark_all').prop("checked", false);
+	}
+}
+
+function add_done_button () {
+	console.log($("#d").length);   //
+	if(!$('#d').length) {		   // Проверка наличия кнопки "Done" на странице (если нет, то кнопка создаётся)
+		create_button();		   //
 	}
 }
