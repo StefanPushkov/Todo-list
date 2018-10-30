@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$(".items").hide();
+	$('footer').hide();
 	});
 
 
@@ -18,6 +19,8 @@ input.keypress(function (e) {
 });
 
 $(".first-input").one("click", add_mrk_all());
+$(".first-input").one("click", add_counter());
+
 
 
 
@@ -59,6 +62,8 @@ function enter_pressed() {
 	    it.append(line);
 	    item.append(it);
 	    $("#first-input").val(''); // очищает содержимое поля ввода
+	    review();
+	    $('footer').show();
 	}
 
 
@@ -84,8 +89,9 @@ function add_mrk_all () {
 
 $(document).on('change', 'input[type="checkbox"]', function () { 
 	$(this).parent().toggleClass("line-through");
-	review();
+	add_counter();
 	add_done_button();
+	review();
 });
 
 
@@ -98,7 +104,7 @@ $(".mark_all").on('change', function () {
 		$(this).parent().toggleClass("line-through");
 	});
 	$("input[type='checkbox']:checked").parent().addClass("line-through");
-
+	review();
 });
 
 
@@ -110,6 +116,19 @@ function create_button() {
 	footer.append(done_div);
 }
 
+
+function create_counter() {
+	var count_div = $("<div id='counter'>");
+	var footer = $(".footer");
+	var counter = $("<p id='counter_2'>");
+	var counter_text = $("input[name='checkbox']:checked").length;
+	$(counter).text(counter_text);
+	var str = " items left"
+	var counter_text = $.parseHTML( str );
+	count_div.append(counter);
+	count_div.append(counter_text);
+	footer.append(count_div);
+}
 /*
 *
 * Review function checks if ".toggle" checkbox was clicked when ".mark_all" checkbox checked  
@@ -123,6 +142,8 @@ function review() {
 	} else {
 		$('.mark_all').prop("checked", false);
 	}
+
+	 $('#counter_2').text(difference);
 }
 
 function add_done_button () {
@@ -131,3 +152,19 @@ function add_done_button () {
 		create_button();		   //
 	}
 }
+
+function add_counter () {
+	console.log($("#counter").length);
+	if(!$("#counter").length) {
+		create_counter();
+	}
+}
+
+$("button").click(function () {
+	$('input[name="checkbox"]:checked').each(function(i) {
+		$(this).parent().remove();
+	});
+});
+
+
+

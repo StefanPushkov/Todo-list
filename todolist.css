@@ -16,7 +16,6 @@ body {
   	background-color: #fff;
   	text-align: center;
   	padding: 20px 30px 20px;
-  	border-radius: 0 0 5px 5px;
   	box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
 }
 
@@ -96,22 +95,48 @@ ul {
 	margin: 0px 5px 0px 5px;
 }
 
-#done {
+footer {
+	width: 580px;
 	display: flex;
 	margin: 0 auto;
-	width: 580px;
-	padding: 0 0 5px;
-	background-color: #f4fce8;
 	color: #555555;
-	border-radius: 0 0 5px 5px;
-	box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
-	justify-content: flex-end;
+	background-color: #f4fce8;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 2px 6px 0;
+   	border-radius: 0 0 5px 5px;
+	justify-content: space-between;
+}
+
+#counter {
+	color: #555555;
+	background-color: #f4fce8;
+	line-height: 3em;
+	margin-left: 20px;
+	font-size: 18px;
+	width: 100px;
+	display: flex;
+	flex-direction: row;
+}
+
+#done {
+	width: 120px;
+	padding: 0 0;
+	display: flex;
+	align-items: center;
+}
+
+#counter_2 {
+	margin-right: 10px;
+	display: flex;
 }
 
 #done button {
 	border-radius: 25px;
 	padding: 6px 0;
-	margin: 5px 21px 0 0;
+	margin: 0px 21px 0 0;
 	width: 90px;
 	font-size: 15px;
+}
+
+button:focus {
+	outline: none;
 }
