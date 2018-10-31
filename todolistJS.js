@@ -160,11 +160,25 @@ function add_counter () {
 	}
 }
 
-$("button").click(function () {
+$(document).on('click', "button", function () {
 	$('input[name="checkbox"]:checked').each(function(i) {
 		$(this).parent().remove();
 	});
 });
+
+
+$(document).on('dblclick', '.todos', function() {
+	$(this).attr("contenteditable", true);
+});
+
+/*$(document).dblclick(function () {
+	$('.todos').each(function(i) {
+		$(this).attr('contenteditable', true);
+	});
+});
+*/
+
+
 
 
 
