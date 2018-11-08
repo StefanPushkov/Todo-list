@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	var els = JSON.parse(localStorage.getItem("thingsTODO"));
+	for (i in els)
+		enter_pressed(els[i]);
+
 	$(".items").hide();
 	$('footer').hide();
 	});
@@ -18,7 +22,7 @@ input.keypress(function (e) {
 	}
 });
 
-$(".first-input").one("click", add_mrk_all());
+$(".first-input").one("click", create_mrk_all());
 $(".first-input").one("click", add_counter());
 
 
@@ -41,7 +45,6 @@ $("#first-input").on("keypress", function(e) {
 		return;
 	}
 });
-
 */
 
 
@@ -64,10 +67,11 @@ function enter_pressed() {
 	    $("#first-input").val(''); // очищает содержимое поля ввода
 	    review();
 	    $('footer').show();
+	    save();
 	}
 
 
-function add_mrk_all () {
+function create_mrk_all (e) {
 
 		var item = $(".items");
 		var mark_all_input = $("<input class='mark_all' type='checkbox'>");
@@ -160,10 +164,18 @@ function add_counter () {
 	}
 }
 
+function add_mrk_all () {
+	console.log($(".mark_line").length);
+	if(!$('.mark_line').length) {
+		create_mrk_all();
+	}
+}
+
 $(document).on('click', "button", function () {
 	$('input[name="checkbox"]:checked').each(function(i) {
-		$(this).parent().remove();
+		$(this).parent().parent().remove();
 	});
+	after_done();
 });
 
 
@@ -178,7 +190,28 @@ $(document).on('dblclick', '.todos', function() {
 });
 */
 
+function save () {
+	var els = $(".todos").toArray();
+	for (i in els) {
+	 els[i] = els[i].text();
+	}
+	localStorage.setItem("thingsTODO", JSON.stringify(els));
+}
 
 
 
+/*
+*
+*
+*
+* функция, отвечающая за удаление footer (кнопки "done", счётчка событий)
+*/
 
+function after_done () {
+	console.log($("input[name='checkbox']").length);
+	if(!$("input[name='checkbox']").length) {
+		$('footer').hide();
+		$('.mark_line').hide();
+	}
+	localStorage.removeItem("thingsTODO");
+}
