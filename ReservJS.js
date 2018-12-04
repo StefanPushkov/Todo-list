@@ -1,17 +1,13 @@
 $(document).ready(function() {
+/*	var els = JSON.parse(localStorage.getItem("thingsTODO"));
+	for (i in els)
+		enter_pressed(els[i]);
+*/
 	$(".items").hide();
 	$('footer').hide();
-}
-/*
-	var xxx = JSON.parse(localStorage.getItem("thingsTODO"));
-	enter_pressed(xxx);
 	});
 
-*/
 
-
-
- 
 
 
 var input = $('#first-input');
@@ -24,27 +20,14 @@ input.keypress(function (e) {
 
 	}
 	}
-}); 
+});
 
 $(".first-input").one("click", create_mrk_all());
 $(".first-input").one("click", add_counter());
 
 
 
-/*$(".first-item").click(function() { 
-	var close = $("<a class='close'>&#10006</a>");
-	$(this).append(close);
-	$(this).blur();
-	}
-);*/
-/*
 
-$(document).on("click", ".close", function() {
-	$(this).parent().remove();
-	function() {
-		if($("input[name='checkbox']").length > 0) 
-	}
-});*/
 /*
 *
 * Add "Done" button when appears first item
@@ -67,7 +50,7 @@ $("#first-input").on("keypress", function(e) {
 
 
 
-function enter_pressed(e) {
+function enter_pressed() {
 
 		$(".items").show(); // открывает список "ul"
 		var it = $("<li class='first-item'>");
@@ -88,7 +71,7 @@ function enter_pressed(e) {
 	}
 
 
-function create_mrk_all () {
+function create_mrk_all (e) {
 
 		var item = $(".items");
 		var mark_all_input = $("<input class='mark_all' type='checkbox'>");
@@ -112,7 +95,9 @@ $(document).on('change', 'input[type="checkbox"]', function () {
 	$(this).parent().toggleClass("line-through");
 	add_counter();
 	review();
+	add_or_remove_done_button();
 });
+
 
 
 
@@ -177,10 +162,9 @@ function add_or_remove_done_button () {							// Проврка на налич�
 		add_done_button();										//  добавляющая кнопку, если нет отмеченных, то кнопка "done" удаляется)
 	} else {
 		$("#d").parent().remove();
+
 	}
 }
-
-
 
 
 function add_counter () {
@@ -219,15 +203,12 @@ $(document).on('dblclick', '.todos', function() {
 */
 
 /*function save () {
-	var els = $('.first-item');
-	for (i in els) 
-	 els[i] = els[i].innerHTML;
-	
+	var els = $(".todos").toArray();
+	for (i in els) {
+	 els[i] = els[i].text();
+	}
 	localStorage.setItem("thingsTODO", JSON.stringify(els));
 }*/
-
-
-
 
 
 
@@ -241,8 +222,9 @@ $(document).on('dblclick', '.todos', function() {
 function after_done () {
 	console.log($("input[name='checkbox']").length);
 	if(!$("input[name='checkbox']").length) {
-		/*$('footer').hide();*/
+		
 		$('.mark_line').hide();
+		$('.footer').hide();
 	}
 	/*localStorage.removeItem("thingsTODO");*/
 }
