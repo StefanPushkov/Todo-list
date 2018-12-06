@@ -87,17 +87,21 @@ ul {
 
 .close {
 	display: flex;
+	background-image: url(destroy.png);
+	background-position: center center;
+	background-size: cover;
 	align-self: center;
   	width: 32px;
   	height: 32px;
-  	margin-top: 28px;
+  	margin-top: 10px;
   	margin-right: 20px;
-  	opacity: 0.5;
+  	opacity: 0;
   	font-size: 17px;
 }
-.close:hover {
-	opacity: 1;
+.first-item:hover > .close {
+	opacity: 0.8;
 	cursor: pointer;
+	transition-duration: 0.4s;
 }
 
 .items li:last-child {

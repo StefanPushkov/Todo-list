@@ -1,7 +1,7 @@
 $(document).ready(function() {
-/*	var els = JSON.parse(localStorage.getItem("thingsTODO"));
+	/*var els = JSON.parse(localStorage.getItem("thingsTODO"));
 	for (i in els)
-		enter_pressed(els[i]);
+		$(".items").append(els[i]);
 */
 	$(".items").hide();
 	$('footer').hide();
@@ -17,7 +17,6 @@ input.keypress(function (e) {
 			return;
 		} else {
 		enter_pressed();
-
 	}
 	}
 });
@@ -59,10 +58,12 @@ function enter_pressed() {
 		var label = $('<label class="todos">');
 	    var text_of_item = $("#first-input").val();
 	    var line = $("<div class='line'>"); 
+	    var destroy = $("<div class='close'>");
 	    $(label).text(text_of_item); // передаёт текст с поля ввода в список "ul" в качестве одного элемента "li"
 	    line.append(checkbox);
 	    line.append(label);
 	    it.append(line);
+	    it.append(destroy);
 	    item.append(it);
 	    $("#first-input").val(''); // очищает содержимое поля ввода
 	    review();
@@ -150,6 +151,14 @@ function review() {
 	 $('#counter_2').text(difference);
 }
 
+function add_to_local_storage() {
+	var elems = $(".first-item").toArray();
+	for (i in elems)
+		elems[i] = elems[i].innerHTML
+	
+	localStorage.setItem("thingsTODO", JSON.stringify(elems));
+}
+
 function add_done_button () {
 	console.log($("#d").length);   //
 	if(!$('#d').length) {		   // Проверка наличия кнопки "Done" на странице (если нет, то кнопка создаётся)
@@ -195,6 +204,13 @@ $(document).on('dblclick', '.todos', function() {
 	$(this).attr("contenteditable", true);
 });
 
+
+$(document).on("click", ".close", function() {
+	$(this).parent().remove();
+	review();
+	add_or_remove_done_button();
+	after_done();
+})
 /*$(document).dblclick(function () {
 	$('.todos').each(function(i) {
 		$(this).attr('contenteditable', true);
@@ -202,13 +218,8 @@ $(document).on('dblclick', '.todos', function() {
 });
 */
 
-/*function save () {
-	var els = $(".todos").toArray();
-	for (i in els) {
-	 els[i] = els[i].text();
-	}
-	localStorage.setItem("thingsTODO", JSON.stringify(els));
-}*/
+
+
 
 
 
@@ -226,5 +237,5 @@ function after_done () {
 		$('.mark_line').hide();
 		$('.footer').hide();
 	}
-	/*localStorage.removeItem("thingsTODO");*/
+	review();
 }
